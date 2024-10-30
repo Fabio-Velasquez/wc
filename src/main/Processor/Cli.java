@@ -18,12 +18,8 @@ public class Cli {
             for (int index = 0; index < tokens.length; index++) {
                 if (tokens[index].equals("ccwc")) {
                     cmd = tokens[index];
-                } else if (tokens[index].equals("-c")) {
+                } else if (tokens[index].equals("-c") || tokens[index].equals("-m") || tokens[index].equals("-l") || tokens[index].equals("-w")) {
                     flag = tokens[index];
-
-                } else if (tokens[index].equals("-l")) {
-                    flag = tokens[index];
-
                 } else if (tokens[index].matches("(\\w+)(\\.)(txt)")) {
                     fileName = tokens[index];
                 }
