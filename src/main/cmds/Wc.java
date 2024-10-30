@@ -13,6 +13,8 @@ public class Wc {
     private String fileName;
     private String flag;
     StringBuilder sb = new StringBuilder();
+    private long numOfLines = 0;
+
     public Wc(String flag, String fileName) {
         this.flag = flag;
         this.fileName = fileName;
@@ -25,9 +27,11 @@ public class Wc {
                 sb.append(line);
                 sb.append(System.lineSeparator());
                 line = br.readLine();
+                numOfLines++;
             }
         } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
+            throw new RuntimeException("File not found in resources directory. Please Put File in appropriate Directory. Stack trace: ");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -52,20 +56,15 @@ public class Wc {
     private String getNumOfChars() {
         return String.valueOf(sb.toString().length());
     }
-
+// was not worth the trade off
     private String getNumOfWords() {
         return String.valueOf(sb.toString().split("\\s+").length);
     }
-
+// better to get num of lines when reading file. No point to do it again. Since there is not a tradeoff
     private String getNumOfLines() {
-        int numberOfNewLines = 0;
-        Matcher m = Pattern.compile("\r\n|\r|\n").matcher(sb.toString());
-        while (m.find()) {
-            numberOfNewLines ++;
-        }
-        return String.valueOf(numberOfNewLines);
+        return String.valueOf(numOfLines);
     }
-
+// was not worth the trade off
     private String getNumOfBytes() {
         return String.valueOf(sb.toString().getBytes().length);
     }
